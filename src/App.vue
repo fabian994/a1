@@ -2,14 +2,21 @@
 
   <v-app>
     <v-app-bar color="#384FFE" app>
-      <div class="d-flex">
-        <v-img :src="logoPath" height="75px" contain width="100px" position="top left"></v-img>
-      </div>
-      <v-btn class="ma-2 hidden-sm-and-down" ><router-link to="/" id="txtBlanco">INICIO</router-link></v-btn>
-      <v-btn class="ma-2 hidden-sm-and-down" ><router-link to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn>
+      <v-row>
+        <v-col>
+          <div class="d-flex">
+            <v-img :src="logoPath" height="75px" contain width="100px" position="top left"></v-img>
+          </div>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-col><v-btn class="ma-2 hidden-sm-and-down" ><router-link to="/" id="txtBlanco">INICIO</router-link></v-btn></v-col>
+        <v-col><v-btn class="ma-2 hidden-sm-and-down" ><router-link to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn></v-col>
 
-      <v-spacer></v-spacer>
-      <v-app-bar-nav-icon class="hidden-md-and-up" />
+        <v-app-bar-nav-icon class="hidden-md-and-up" />
+      </v-row>
     </v-app-bar>
     <RouterView/>
   </v-app>
