@@ -3,19 +3,15 @@
   <v-app>
     <v-app-bar color="#384FFE" app>
       <v-row>
-        <v-col>
-          <div class="d-flex">
-            <v-img :src="logoPath" height="75px" contain width="100px" position="top left"></v-img>
-          </div>
+        <v-col class="d-flex justify-start align-center">
+            <v-img :src="logoPath"   ></v-img>
         </v-col>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-col><v-btn class="ma-2 hidden-sm-and-down" ><router-link to="/" id="txtBlanco">INICIO</router-link></v-btn></v-col>
-        <v-col><v-btn class="ma-2 hidden-sm-and-down" ><router-link to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn></v-col>
-
-        <v-app-bar-nav-icon class="hidden-md-and-up" />
+        <v-spacer class="d-none d-md-block"></v-spacer>
+        <v-spacer class="d-none d-md-block"></v-spacer>
+        <v-spacer class="d-none d-md-block"></v-spacer>
+        <v-spacer class="d-none d-md-block"></v-spacer>
+        <v-col class="d-flex justify-end align-center "><v-btn ><router-link to="/" id="txtBlanco">INICIO</router-link></v-btn></v-col>
+        <v-col class="d-flex justify-end align-center"><v-btn><router-link to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn></v-col>
       </v-row>
     </v-app-bar>
     <RouterView/>

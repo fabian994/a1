@@ -13,9 +13,11 @@
           <v-dialog
               v-model="dialog"
               activator="parent"
-              width="50%"
+              max-width="60%"
+              class="pa-2 ma-2"
+
           >
-            <v-card >
+            <v-card class="rounded-lg">
               <v-card-title id="textoAzul2" class="font-weight-bold">{{course.courseName}}</v-card-title>
               <v-card-text id="textoGris">
                 Profesor: {{course.professor}}
@@ -37,6 +39,8 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+
+
 
         </v-btn></div>
       </v-card-actions>
