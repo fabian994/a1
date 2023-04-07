@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory} from "vue-router";
 import App from './App.vue'
-import home from './components/home.vue'
+import homePage from './components/homePage.vue'
 import courses from './components/courses.vue'
 import signUp from "./components/signUp.vue";
 import logIn from "./components/logIn.vue";
@@ -20,7 +20,7 @@ const vuetify = createVuetify({
 
 const routes = [
     { path: '/', redirect: '/login'},
-    { path: '/home', component: home},
+    { path: '/home', component: homePage},
     { path: '/courses', component: courses},
     { path: '/signUp', component: signUp},
     { path: '/logIn', component: logIn},

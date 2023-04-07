@@ -2,7 +2,7 @@
   <v-container>
     <v-row><v-spacer></v-spacer><h1>INFORMACIÓN DEL ALUMNO</h1><v-spacer></v-spacer></v-row>
 
-    <v-row><v-spacer></v-spacer><v-avatar :image="studentImg" size="250"></v-avatar><v-spacer></v-spacer></v-row>
+    <v-row><v-spacer></v-spacer><v-avatar :image="uimage" size="250"></v-avatar><v-spacer></v-spacer></v-row>
     <div class="d-none d-md-block">
       <v-row >
         <v-spacer></v-spacer>
@@ -57,18 +57,26 @@
   </v-container>
 </template>
 
-<script>
-import image from "@/assets/juan-escutia2.jpeg"
-export default {
+<script setup>
+  //import image from "@/assets/juan-escutia2.jpeg"
+  import firebase from "firebase/compat/app";
+  import "firebase/compat/auth"
+  import { useRouter } from 'vue-router'
+  import { onBeforeUnmount } from 'vue'
 
-  name: 'homePage',
-  data: function () {
-    return {
-      studentImg: image
+  const uimage = new URL('@/assets/juan-escutia2.jpeg', import.meta.url).href
+  const router = useRouter()
+  const authListener = firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) { // not logged in
+      alert('you must be logged in to view this. redirecting to the home page')
+      router.push('/')
     }
-  },
-  // './src/assets/juan-escutia2.jpeg')
-}
+  })
+  onBeforeUnmount(() => {
+    // clear up listener
+    authListener()
+  })
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

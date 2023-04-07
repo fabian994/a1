@@ -5,7 +5,7 @@
       <v-row><v-text-field label="Correo Institucional" variant="outlined" v-model="Iemail" type="email"></v-text-field></v-row>
       <v-row><v-text-field label="Contraseña" variant="outlined" v-model="password" type="password"></v-text-field></v-row>
       <v-row><p v-if="errMsg">{{ errMsg }}</p></v-row>
-      <v-row><v-spacer></v-spacer><p><v-btn type="submit">Register</v-btn></p><v-spacer></v-spacer></v-row>
+      <v-row><v-spacer></v-spacer><p><v-btn type="submit">Iniciar Sesión</v-btn></p><v-spacer></v-spacer></v-row>
     </v-form>
 
   </v-container>

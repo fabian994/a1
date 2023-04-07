@@ -4,17 +4,16 @@
     <v-app-bar color="#384FFE" app>
       <v-row>
         <v-col class="d-flex justify-start align-center">
-            <v-img src="@/assets/logoTec.png"   ></v-img>
+          <v-img :src="logoPath" ></v-img>
         </v-col>
         <v-spacer class="d-none d-md-block"></v-spacer>
+
         <v-spacer class="d-none d-md-block"></v-spacer>
-        <v-spacer class="d-none d-md-block"></v-spacer>
-        <v-spacer class="d-none d-md-block"></v-spacer>
-        <v-col><span v-if="isLoggedIn"
+        <v-col class="d-flex justify-start align-center"><span v-if="isLoggedIn"
         >
-          <v-btn ><router-link to="/" id="txtBlanco">INICIO</router-link></v-btn>
+          <v-btn ><router-link to="/home" id="txtBlanco">INICIO</router-link></v-btn>
           <v-btn><router-link to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn>
-          <button @click="signOut">Logout</button>
+          <v-btn @click="signOut" variant="text" icon="mdi-logout-variant" color="white" ></v-btn>
       </span>
           <span v-else>
           <router-link to="/logIn"> INICIAR SESIÓN </router-link>
@@ -38,7 +37,8 @@
   import { useRouter } from 'vue-router'
   const router = useRouter()
   const isLoggedIn = ref(true)
-  //const logoPath = './assets/logoTec.png'
+  const logoPath = new URL('./assets/logoTec.png', import.meta.url).href
+  //./assets/logout_variant.svg
   // runs after firebase is initialized
   firebase.auth().onAuthStateChanged(function(user) {
     isLoggedIn.value = !!user;

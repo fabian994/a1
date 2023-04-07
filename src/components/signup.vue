@@ -8,21 +8,27 @@
     <v-row><v-text-field label="Correo Personal" variant="outlined" v-model="Pemail" type="email"></v-text-field></v-row>
     <v-row><v-text-field label="Contraseña" variant="outlined" v-model="password1" type="password"></v-text-field></v-row>
     <v-row><v-text-field label="Confirmar Contraseña" variant="outlined" v-model="password2" type="password"></v-text-field></v-row>
-    <v-row><v-spacer></v-spacer><p><v-btn type="submit">Register</v-btn></p><v-spacer></v-spacer></v-row>
+    <v-row><v-spacer></v-spacer><p><v-btn type="submit">Registrarse</v-btn></p><v-spacer></v-spacer></v-row>
     </v-form>
 
   </v-container>
 </template>
 
 <script setup>
-import firebase from "firebase/compat/app";
+import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
+import 'firebase/compat/firestore'
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router' // import router
 
 const Iemail = ref('')
 const password1 = ref('')
+
+const fName = ref('')
+const uID = ref('')
+const Pemail = ref('')
+//const password2 = ref('')
 const router = useRouter() // get a reference to our vue router
 const register = () => { // we also renamed this method
   firebase
@@ -30,6 +36,17 @@ const register = () => { // we also renamed this method
       .createUserWithEmailAndPassword(Iemail.value, password1.value) // THIS LINE CHANGED
       .then(() => {
         console.log('Successfully logged in!');
+        firebase
+            .firestore()
+            .collection('users')
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+              fullName: fName.value,
+              sUID: uID.value,
+              insMail: Iemail.value,
+              perMail: Pemail.value,
+
+            })
         router.push('/home') // redirect to the feed
       })
       .catch(error => {
