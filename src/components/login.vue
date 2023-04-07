@@ -1,17 +1,51 @@
 <template>
   <v-container>
-    <v-row><v-spacer></v-spacer><h1>LOGIN</h1><v-spacer></v-spacer></v-row>
-    <v-row><v-text-field label="Correo Institucional" variant="outlined" v-model="Iemail" type="email"></v-text-field></v-row>
-    <v-row><v-text-field label="Contraseña" variant="outlined" v-model="password1" type="password"></v-text-field></v-row>
-    <v-row><v-spacer></v-spacer><p><button @click="register">Submit</button></p><v-spacer></v-spacer></v-row>
-
+    <v-form @submit.prevent="login">
+      <v-row><v-spacer></v-spacer><h1>LOGIN</h1><v-spacer></v-spacer></v-row>
+      <v-row><v-text-field label="Correo Institucional" variant="outlined" v-model="Iemail" type="email"></v-text-field></v-row>
+      <v-row><v-text-field label="Contraseña" variant="outlined" v-model="password" type="password"></v-text-field></v-row>
+      <v-row><p v-if="errMsg">{{ errMsg }}</p></v-row>
+      <v-row><v-spacer></v-spacer><p><v-btn type="submit">Register</v-btn></p><v-spacer></v-spacer></v-row>
+    </v-form>
 
   </v-container>
 </template>
 
-<script>
-export default {
-  name: "logIn"
+<script setup>
+import { ref } from 'vue'
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth"
+
+import { useRouter } from 'vue-router' // import router
+const Iemail = ref('')
+const password = ref('')
+const errMsg = ref() // ERROR MESSAGE
+const router = useRouter() // get a reference to our vue router
+const login = () => { // we also renamed this method
+  firebase
+      .auth()
+      .signInWithEmailAndPassword(Iemail.value, password.value) // THIS LINE CHANGED
+      .then(() => {
+        console.log('Successfully logged in!');
+        router.push('/home') // redirect to the feed
+      })
+      .catch(error => {
+        switch (error.code) {
+          case 'auth/invalid-email':
+            errMsg.value = 'Invalid email'
+            break
+          case 'auth/user-not-found':
+            errMsg.value = 'No account with that email was found'
+            break
+          case 'auth/wrong-password':
+            errMsg.value = 'Incorrect password'
+            break
+          default:
+            errMsg.value = 'Email or password was incorrect'
+            break
+        }
+      });
 }
 </script>
 

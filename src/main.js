@@ -3,13 +3,15 @@ import { createRouter, createWebHistory} from "vue-router";
 import App from './App.vue'
 import home from './components/home.vue'
 import courses from './components/courses.vue'
-import signUp from "./components/signup.vue";
-import login from "./components/login.vue";
+import signUp from "./components/signUp.vue";
+import logIn from "./components/logIn.vue";
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+// Firebase
+import '@/plugins/firebaseConfig'
 
 const vuetify = createVuetify({
     components,
@@ -17,10 +19,11 @@ const vuetify = createVuetify({
 })
 
 const routes = [
-    { path: '/', component: home},
+    { path: '/', redirect: '/login'},
+    { path: '/home', component: home},
     { path: '/courses', component: courses},
     { path: '/signUp', component: signUp},
-    { path: '/login', component: login},
+    { path: '/logIn', component: logIn},
 ]
 
 const router = createRouter({

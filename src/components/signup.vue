@@ -1,41 +1,42 @@
 <template>
   <v-container>
     <v-row><v-spacer></v-spacer><h1>SIGNUP</h1><v-spacer></v-spacer></v-row>
+    <v-form @submit.prevent="register">
     <v-row><v-text-field label="Nombre Completo" variant="outlined" v-model="fName"></v-text-field></v-row>
     <v-row><v-text-field label="Matrícula" variant="outlined" v-model="uID" ></v-text-field></v-row>
     <v-row><v-text-field label="Correo Institucional" variant="outlined" v-model="Iemail" type="email"></v-text-field></v-row>
     <v-row><v-text-field label="Correo Personal" variant="outlined" v-model="Pemail" type="email"></v-text-field></v-row>
     <v-row><v-text-field label="Contraseña" variant="outlined" v-model="password1" type="password"></v-text-field></v-row>
     <v-row><v-text-field label="Confirmar Contraseña" variant="outlined" v-model="password2" type="password"></v-text-field></v-row>
-    <v-row><v-spacer></v-spacer><p><button @click="register">Submit</button></p><v-spacer></v-spacer></v-row>
+    <v-row><v-spacer></v-spacer><p><v-btn type="submit">Register</v-btn></p><v-spacer></v-spacer></v-row>
+    </v-form>
 
   </v-container>
 </template>
 
 <script setup>
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth"
+
 import { ref } from 'vue'
-import firebase from 'firebase/compat/app'
 import { useRouter } from 'vue-router' // import router
-const email = ref('')
-const password = ref('')
+
+const Iemail = ref('')
+const password1 = ref('')
 const router = useRouter() // get a reference to our vue router
-const register = () => {
+const register = () => { // we also renamed this method
   firebase
-      .auth() // get the auth api
-      .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()
-      .then((data) => {
-        console.log('Successfully registered!');
-        router.push('/feed') // redirect to the feed
+      .auth()
+      .createUserWithEmailAndPassword(Iemail.value, password1.value) // THIS LINE CHANGED
+      .then(() => {
+        console.log('Successfully logged in!');
+        router.push('/home') // redirect to the feed
       })
       .catch(error => {
         console.log(error.code)
         alert(error.message);
       });
-}
-</script>
-<script>
-export default {
-  name: "signUp"
+
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
