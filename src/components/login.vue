@@ -22,6 +22,7 @@ const Iemail = ref('')
 const password = ref('')
 const errMsg = ref() // ERROR MESSAGE
 const router = useRouter() // get a reference to our vue router
+
 const login = () => { // we also renamed this method
   firebase
       .auth()

@@ -16,8 +16,8 @@
           <v-btn @click="signOut" variant="text" icon="mdi-logout-variant" color="white" ></v-btn>
       </span>
           <span v-else>
-          <router-link to="/logIn"> INICIAR SESIÓN </router-link>
-          <router-link to="/signUp"> REGISTRARSE </router-link> |
+          <router-link to="/logIn" id="txtBlanco"> INICIAR SESIÓN </router-link>
+          <router-link to="/signUp" id="txtBlanco"> REGISTRARSE </router-link>
 
       </span></v-col>
 

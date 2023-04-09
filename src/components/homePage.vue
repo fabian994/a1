@@ -12,8 +12,8 @@
       </v-row>
       <v-row>
         <v-spacer></v-spacer>
-        <v-col align-self="center"><p>Juan Escutia</p></v-col>
-        <v-col align-self="center"><p>A01361234</p></v-col>
+        <v-col align-self="center"><p>{{data.fullName}}</p></v-col>
+        <v-col align-self="center"><p>{{ data.sUID }}</p></v-col>
         <v-spacer></v-spacer>
       </v-row>
       <v-row>
@@ -24,8 +24,8 @@
       </v-row>
       <v-row>
         <v-spacer></v-spacer>
-        <v-col><p>A01361234@tec.mx</p></v-col>
-        <v-col><p>ISC</p></v-col>
+        <v-col><p>{{data.insMail}}</p></v-col>
+        <v-col><p>{{data.major}}</p></v-col>
         <v-spacer></v-spacer>
       </v-row>
 
@@ -37,7 +37,7 @@
       </v-row>
       <v-row >
         <v-spacer></v-spacer>
-        <v-col><p>murioporlapatria@gmail.com</p></v-col>
+        <v-col><p>{{data.perMail}}</p></v-col>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
       </v-row>
@@ -59,22 +59,47 @@
 
 <script setup>
   //import image from "@/assets/juan-escutia2.jpeg"
-  import firebase from "firebase/compat/app";
-  import "firebase/compat/auth"
   import { useRouter } from 'vue-router'
-  import { onBeforeUnmount } from 'vue'
+  import {ref, onBeforeMount, onMounted} from 'vue'
+  import firebase from "firebase/compat/app"
+  import { getAuth } from 'firebase/auth'
+  import { getFirestore, getDoc, doc } from 'firebase/firestore'
 
+
+  //const uRef = db.collection('users')
   const uimage = new URL('@/assets/juan-escutia2.jpeg', import.meta.url).href
   const router = useRouter()
+
+  const data = ref({
+    fName:'',
+    sUID:'',
+    insMail:'',
+    perMail:'',
+    major:''
+  })
+
   const authListener = firebase.auth().onAuthStateChanged(function(user) {
     if (!user) { // not logged in
       alert('you must be logged in to view this. redirecting to the home page')
       router.push('/')
     }
+    else {
+      console.log('func')
+    }
   })
-  onBeforeUnmount(() => {
+  onBeforeMount(() => {
     // clear up listener
     authListener()
+  })
+  onMounted(async () => {
+    const auth = getAuth()
+    const user = auth.currentUser
+    const db = getFirestore()
+    const docRef = doc(db, 'users', user.uid)
+    const docSnap = await getDoc(docRef)
+    //const storage = getStorage()
+    //userImage.value = await getDownloadURL(storageRef(storage, 'user.jpg'))
+    data.value = docSnap.data()
   })
 
 </script>
