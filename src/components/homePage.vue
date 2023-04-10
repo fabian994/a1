@@ -2,7 +2,7 @@
   <v-container>
     <v-row><v-spacer></v-spacer><h1>INFORMACIÓN DEL ALUMNO</h1><v-spacer></v-spacer></v-row>
 
-    <v-row><v-spacer></v-spacer><v-avatar :image="uimage" size="250"></v-avatar><v-spacer></v-spacer></v-row>
+    <v-row><v-spacer></v-spacer><v-avatar :image="uImage" size="250"></v-avatar><v-spacer></v-spacer></v-row>
     <div class="d-none d-md-block">
       <v-row >
         <v-spacer></v-spacer>
@@ -44,15 +44,15 @@
     </div>
     <div class="d-md-none">
       <h3>Nombre Completo</h3>
-      <p>Juan Escutia</p>
+      <p>{{data.fullName}}</p>
       <h3>Matrícula</h3>
-      <p>A01361234</p>
+      <p>{{data.sUID}}</p>
       <h3>Correo Institucional</h3>
-      <p>A01361234@tec.mx</p>
+      <p>{{data.insMail}}</p>
       <h3>Carrera</h3>
-      <p>ISC</p>
+      <p>{{data.major}}</p>
       <h3>Correo Personal</h3>
-      <p>murioporlapatria@gmail.com</p>
+      <p>{{data.perMail}}</p>
     </div>
   </v-container>
 </template>
@@ -64,12 +64,11 @@
   import firebase from "firebase/compat/app"
   import { getAuth } from 'firebase/auth'
   import { getFirestore, getDoc, doc } from 'firebase/firestore'
+  import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage'
 
 
-  //const uRef = db.collection('users')
-  const uimage = new URL('@/assets/juan-escutia2.jpeg', import.meta.url).href
   const router = useRouter()
-
+  const uImage = ref('')
   const data = ref({
     fName:'',
     sUID:'',
@@ -97,8 +96,11 @@
     const db = getFirestore()
     const docRef = doc(db, 'users', user.uid)
     const docSnap = await getDoc(docRef)
-    //const storage = getStorage()
-    //userImage.value = await getDownloadURL(storageRef(storage, 'user.jpg'))
+
+    const storage = getStorage();
+    const pathReference = storageRef(storage, 'juan-escutia2.jpeg');
+    uImage.value = await getDownloadURL(pathReference)
+
     data.value = docSnap.data()
   })
 
