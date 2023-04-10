@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row><v-spacer></v-spacer><h1>SIGNUP</h1><v-spacer></v-spacer></v-row>
+    <v-row><v-spacer></v-spacer><h1>CREA UNA CUENTA</h1><v-spacer></v-spacer></v-row>
     <v-form @submit.prevent="register">
     <v-row><v-text-field label="Nombre Completo" variant="outlined" color="#384FFE" v-model="fName"></v-text-field></v-row>
     <v-row><v-text-field label="Matrícula" variant="outlined" v-model="uID" ></v-text-field></v-row>
@@ -14,7 +14,7 @@
       <v-row><p v-if="errMsg4">{{ errMsg4 }}</p></v-row>
     <v-row><v-text-field label="Confirmar Contraseña" variant="outlined" color="#384FFE" v-model="password2" type="password"></v-text-field></v-row>
       <v-row><v-spacer></v-spacer><v-checkbox color="#384FFE" label="Acepto términos y condiciones"></v-checkbox><v-spacer></v-spacer></v-row>
-      <v-row><v-spacer></v-spacer><v-btn type="submit" color="light-blue-lighten-3" class="d-flex justify-start align-center text-white"  text><span>Registrarse</span></v-btn><v-spacer></v-spacer></v-row>
+      <v-row><v-spacer></v-spacer><v-btn type="submit" color="#384FFE" class="d-flex justify-start align-center text-white"  text><span>Registrarse</span></v-btn><v-spacer></v-spacer></v-row>
     </v-form>
 
   </v-container>

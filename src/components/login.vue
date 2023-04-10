@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-form @submit.prevent="login">
-      <v-row><v-spacer></v-spacer><h1>LOGIN</h1><v-spacer></v-spacer></v-row>
+      <v-row><v-spacer></v-spacer><h1 class="ma-16">INICIO DE SESIÓN</h1><v-spacer></v-spacer></v-row>
       <v-row><v-text-field label="Correo Institucional" variant="outlined" v-model="Iemail" type="email"></v-text-field></v-row>
       <v-row><v-text-field label="Contraseña" variant="outlined" v-model="password" type="password"></v-text-field></v-row>
       <v-row><p v-if="errMsg">{{ errMsg }}</p></v-row>
-      <v-row><v-spacer></v-spacer><p><v-btn type="submit">Iniciar Sesión</v-btn></p><v-spacer></v-spacer></v-row>
+      <v-row><v-spacer></v-spacer><p><v-btn type="submit" color="#384FFE" class="text-white ma-16">Iniciar Sesión</v-btn></p><v-spacer></v-spacer></v-row>
     </v-form>
 
   </v-container>

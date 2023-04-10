@@ -9,7 +9,7 @@
           <span v-if="isLoggedIn">
             <v-btn><router-link  to="/home" id="txtBlanco">INICIO</router-link></v-btn>
             <v-btn><router-link  to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn>
-            <v-btn @click="signOut" icon="mdi-logout"></v-btn>
+            <v-btn @click="signOut" icon="mdi-logout" color="white"></v-btn>
           </span>
           <span v-else>
           <v-btn ><router-link to="/logIn" id="txtBlanco"> INICIAR SESIÓN </router-link></v-btn>

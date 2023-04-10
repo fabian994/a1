@@ -2,27 +2,28 @@
 
   <v-container>
     <v-row><v-spacer></v-spacer><h1>MATERIAS INSCRITAS</h1><v-spacer></v-spacer></v-row>
-<!--    <v-row><p v-for="course in courseList" :key="course.id"> {{ course.id }} {{ course.classroom }} </p></v-row>-->
-    <v-row v-for="course in courseList" :key="course.id"><v-col>
-      <v-card class="rounded-lg" >
+
+<!--   <v-row><p v-for="course in courseList" :key="course.id"> {{ course }} - {{ course.classroom }} </p></v-row>-->
+    <v-row ><v-col>
+<!--        <template v-for="course in courseList" v-bind:key="course.id">-->
+        <courseInfo v-for="(course, index) in courseList" v-bind='course' :key="index"/>
+<!--      <v-card class="rounded-lg" >
        <v-card-title id="textoAzul" >{{ course.courseTitle }}</v-card-title>
        <v-card-subtitle id="textoGris">Profesor: {{course.professor}}</v-card-subtitle>
        <v-card-actions class="justify-end text-h5">
          <div class="text-xs-center">
-         <v-btn class="text-caption font-weight-bold text-h3"> <p id="masDetalles">Ver Detalles</p>
-
+         <v-btn class="text-caption font-weight-bold text-h3"> <p id="masDetalles">Ver Detalles {{course.id}}</p>
            <v-dialog
                v-model="dialog"
                activator="parent"
                max-width="60%"
                class="pa-2 ma-2"
-
            >
              <v-card class="rounded-lg">
                <v-card-title id="textoAzul2" class="font-weight-bold">{{course.courseTitle}}</v-card-title>
-<!--               <v-card-text id="textoGris">
+               <v-card-text id="textoGris">
                  Salón: {{course.id}}
-               </v-card-text>-->
+               </v-card-text>
                <v-card-text id="textoGris">
                  Profesor: {{course.professor}}
                </v-card-text>
@@ -43,9 +44,11 @@
                </v-card-actions>
              </v-card>
            </v-dialog>
-         </v-btn></div>
+         </v-btn>
+         </div>
        </v-card-actions>
-     </v-card></v-col>
+     </v-card>-->
+    </v-col>
      </v-row>
   </v-container>
 </template>
@@ -55,10 +58,14 @@
   import { ref, onBeforeMount, onMounted} from 'vue'
   import firebase from "firebase/compat/app"
   import { getFirestore, getDocs, collection, query } from 'firebase/firestore'
+  //import courseInfo from '../components/courseInfo.vue'
+  import CourseInfo from "@/components/courseInfo.vue";
 
   const router = useRouter()
   const courseList = ref([])
-  let dialog = ref(false)
+  //let dialog = ref(false)
+
+
 
   const authListener = firebase.auth().onAuthStateChanged(function(user) {
     if (!user) { // not logged in
