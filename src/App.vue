@@ -2,27 +2,20 @@
 
   <v-app>
     <v-app-bar color="#384FFE" app>
-      <v-row>
-        <v-col class="d-flex justify-start align-center">
-          <v-img :src="logoPath" ></v-img>
-        </v-col>
-        <v-spacer class="d-none d-md-block"></v-spacer>
 
-        <v-spacer class="d-none d-md-block"></v-spacer>
-        <v-col class="d-flex justify-start align-center"><span v-if="isLoggedIn"
-        >
-          <v-btn ><router-link to="/home" id="txtBlanco">INICIO</router-link></v-btn>
-          <v-btn><router-link to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn>
-          <v-btn @click="signOut" variant="text" icon="mdi-logout-variant" color="white" ></v-btn>
-      </span>
+      <v-img  class="d-flex justify-start align-center" :src="logoPath" aspect-ratio="16/9" ></v-img>
+        <v-spacer class="d-none d-sm-block"></v-spacer>
+        <v-spacer class="d-none d-sm-block"></v-spacer>
+          <span v-if="isLoggedIn">
+            <v-btn><router-link  to="/home" id="txtBlanco">INICIO</router-link></v-btn>
+            <v-btn><router-link  to="/courses" id="txtBlanco">LISTA DE MATERIAS</router-link></v-btn>
+            <v-btn @click="signOut" icon="mdi-logout"></v-btn>
+          </span>
           <span v-else>
-          <router-link to="/logIn" id="txtBlanco"> INICIAR SESIÓN </router-link>
-          <router-link to="/signUp" id="txtBlanco"> REGISTRARSE </router-link>
+          <v-btn ><router-link to="/logIn" id="txtBlanco"> INICIAR SESIÓN </router-link></v-btn>
+          <v-btn ><router-link to="/signUp" id="txtBlanco"> REGISTRARSE </router-link></v-btn>
+          </span>
 
-      </span></v-col>
-
-
-      </v-row>
     </v-app-bar>
     <RouterView/>
   </v-app>
